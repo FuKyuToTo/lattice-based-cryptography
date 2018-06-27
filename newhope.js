@@ -352,7 +352,7 @@
 	}
 	//***********************************************************
 	function print(message) {
-		WScript.Echo(message);	//for WSH
-	//	console.log(message);
+		//WScript.Echo(message);	//for WSH
+		console.log(message);
 	}
 	testnewhope();
