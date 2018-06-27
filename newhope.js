@@ -82,7 +82,7 @@
 	}
 	
 	function nextInt(q) {
-	    return Math.floor(Math.random() * q);
+	    return Math.floor(random() * q);	//prng.js -> random()
 	}
 	
 	function getBit (decimal_a, index) {
@@ -352,7 +352,7 @@
 	}
 	//***********************************************************
 	function print(message) {
-//		WScript.Echo(message);	//for WSH
-		console.log(message);
+		WScript.Echo(message);	//for WSH
+	//	console.log(message);
 	}
 	testnewhope();
