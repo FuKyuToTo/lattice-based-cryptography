@@ -392,7 +392,7 @@
 	
 	//***********************************************************
 	function print(message) {
-		WScript.Echo(message);
-	//	console.log(message);
+	//	WScript.Echo(message);
+		console.log(message);
 	}
 	testringlizard();
