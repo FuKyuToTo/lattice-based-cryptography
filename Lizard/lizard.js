@@ -240,19 +240,19 @@ var TestMatrix = function() {
 		}
 	};
 //	-------------------------------------------private method-------------------------------------------
+	function nextInt(q) {
+	    return Math.floor(random() * q);	//prng.js -> random()
+	}
+	
 	function rangeValue(low, high) {
 		return Math.floor(random() * (high - low + 1) + low);
 	}
 	
-	function nextInt(q) {
-	    return Math.floor(random() * q);
-	}
-	
-    function shuffle(arr) {
-    	var arr2 = arr.slice();
-    	for(var j, x, i = arr2.length; i; j = parseInt(random() * i), x = arr2[--i], arr2[i] = arr2[j], arr2[j] = x);
-    	return arr2;    
-    }
+    	function shuffle(arr) {
+    		var arr2 = arr.slice();
+    		for(var j, x, i = arr2.length; i; j = parseInt(random() * i), x = arr2[--i], arr2[i] = arr2[j], arr2[j] = x);
+    		return arr2;    
+  	}
     
 	function checkMatrixDimensions(B) {
 		if (B.x() != x || B.y() != y) {
