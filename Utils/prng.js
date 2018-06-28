@@ -23,9 +23,9 @@
 	}
 
 	// From http://baagoe.com/en/RandomMusings/javascript/
+	// Johannes Baagøe <baagoe@baagoe.com>, 2010
 	function Alea() {
 	  return (function(args) {
-	    // Johannes Baagøe <baagoe@baagoe.com>, 2010
 	    var s0 = 0;
 	    var s1 = 0;
 	    var s2 = 0;
