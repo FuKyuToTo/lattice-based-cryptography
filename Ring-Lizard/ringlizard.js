@@ -1,3 +1,5 @@
+	//<script type="text/javascript" src="Utils/prng.js"></script>	
+
 	// Generate a random integer between 0(inclusive) and q-1(inclusive)
 	function nextInt(q) {
 		return Math.floor(random() * q);	// prng.js -> random()
@@ -12,12 +14,6 @@
 		var arr2 = arr.slice();
 		for (var j, x, i = arr2.length; i; j = parseInt(random() * i), x = arr2[--i], arr2[i] = arr2[j], arr2[j] = x);
 		return arr2;
-	}
-		
-	//return a random number of probability distribution
-	function createMemberInProbabilityDistribution(mean, std_dev){
-		var g = testRejectionSampling(mean, std_dev);
-		return g;
 	}
 	
 	//rejection sampling
@@ -161,7 +157,7 @@
 		var arr_s = new Array(n);
 
 		for (var i = 0; i < n; i++) {
-			e[i] = createMemberInProbabilityDistribution(0.0, sigma);
+			e[i] = testRejectionSampling(0.0, sigma);
 		}
 		for (var i = 0; i < 64; i++) {
 			arr_s[i] = 1;
