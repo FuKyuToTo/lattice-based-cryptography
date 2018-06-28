@@ -75,6 +75,7 @@
 	  } (Array.prototype.slice.call(arguments)));
 	};
 
+	//prng
 	var random = Alea();
 	var seed = random.args;
 	random = Alea(seed);
