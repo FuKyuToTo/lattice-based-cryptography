@@ -100,7 +100,7 @@ function INTT(A, n) {
 }
 //--------------------------------------------------------------------------------------
 function nextInt(q) {
-	return Math.floor(random() * q);
+	return Math.floor(random() * q);	//prng.js -> random()
 }
 
 function getBit (decimal_a, index) {
@@ -396,7 +396,7 @@ function testkyber() {
 }
 //***********************************************************
 function print(message) {
-//	WScript.Echo(message);
+//	WScript.Echo(message);	//for WSH
 	console.log(message);
 }
 testkyber();
