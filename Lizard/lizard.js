@@ -1,3 +1,4 @@
+//<script type="text/javascript" src="Utils/prng.js"></script>
 //===============================================================================
 var TestMatrix = function() {
     var x = 0;
