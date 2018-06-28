@@ -55,7 +55,8 @@
 		return arr2;
 	}
 
-	//return a new array containing the specified range from the original array, truncated or padded with nulls to obtain the required length
+	//return a new array containing the specified range from the original array, 
+	//truncated or padded with nulls to obtain the required length
 	function copyOfRange(arr1, from, to) {
 		var length = to - from;
 		//    	var arr2 = new Array(length);
