@@ -1,4 +1,5 @@
 //<script type="text/javascript" src="Utils/prng.js"></script>
+//<script type="text/javascript" src="lizard_random_values.js"></script>
 //===============================================================================
 var TestMatrix = function() {
     var x = 0;
