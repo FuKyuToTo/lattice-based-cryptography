@@ -1,116 +1,5 @@
 //<script type="text/javascript" src="Utils/prng.js"></script>
 //<script type="text/javascript" src="frodo_random_values.js"></script>
-
-var am;
-var bm;
-var sm;
-var bb;
-var cc;
-
-var arr_v;
-var k1matrix;
-var k2matrix;
-
-function alice0() {
-    var amatrix = TestMatrix();
-	var smatrix = TestMatrix();
-	var ematrix = TestMatrix();
-
-    amatrix.initMatrix_random(n, n, q);
-	smatrix.initMatrix_2d_uncheck(ss, n, l);
-	ematrix.initMatrix_2d_uncheck(ee, n, l);
-	
-	var bmatrix = TestMatrix();
-	bmatrix = amatrix.multiply(smatrix).add(ematrix);
-	bmatrix.mod(q);
-	
-	am = amatrix;
-	bm = bmatrix;
-	sm = smatrix;
-}
-
-function bob() {
-	var amatrix = am;
-	var bmatrix = bm;
-	
-	var s1matrix = TestMatrix();	// Z^m*n
-	var e1matrix = TestMatrix();	// Z^m*n
-	var e2matrix = TestMatrix();	// Z^m*l
-	
-	s1matrix.initMatrix_2d_uncheck(ss1, m, n);
-	e1matrix.initMatrix_2d_uncheck(ee1, m, n);
-	e2matrix.initMatrix_2d_uncheck(ee2, m, l);
-	
-	var b1matrix = s1matrix.multiply(amatrix);
-	var vmatrix = s1matrix.multiply(bmatrix);
-	
-    b1matrix = b1matrix.add(e1matrix);  // Z^m*n
-    b1matrix.mod(q);
-    vmatrix = vmatrix.add(e2matrix);    // Z^m*l
-	vmatrix.mod(q);
-	
-	var newC = [];
-	var newV = [];
-	for (var i = 0; i < vmatrix.getMatrix().length; i++) {
-		newC[i] = vmatrix.getMatrix()[i].slice();
-		newV[i] = vmatrix.getMatrix()[i].slice();
-	}
-	
-	var cmatrix = TestMatrix();    // Z^m*l
-	k1matrix = TestMatrix();     // Z^m*l
-	cmatrix.initMatrix_2d_uncheck(newC, m, l);
-	k1matrix.initMatrix_2d_uncheck(newV, m, l);
-	
-	var arr_c = cmatrix.getMatrix();
-	var arr_k1 = k1matrix.getMatrix();
-    for (var i = 0; i < m; i++) {
-        for (var j = 0; j < l; j++) {
-            arr_c[i][j] = (arr_c[i][j] >> 10) & 1;	// >> logq - b - 1
-            //arr_c[i][j] = Math.floor(arr_c[i][j] * 0.0009765625) % 2;
-			
-			arr_k1[i][j] = (arr_k1[i][j] + 1024) % q;
-            arr_k1[i][j] >>= 11;  // >>= logq - b
-            //arr_k1[i][j] = Math.round(arr_k1[i][j] * 0.00048828125) % 16;
-        }
-    }
-	
-	bb = b1matrix;
-	cc = cmatrix;
-}
-
-function alice1() {
-	var b1m = bb;
-	var cm = cc;
-	var smatrix = sm;
-	
-	var b1s = b1m.multiply(smatrix);    // Z^m*l
-	b1s.mod(q);
-    k2matrix = b1s;     // Z^m*l
-	rec(k2matrix.getMatrix(), m, l, 11, cm.getMatrix());
-}
-//--------------------------------------------------------------------------------------
-function rec(b1s, m, l, a, h) {
-	var whole = 1 << a;
-	var mask = whole - 1;
-	var negmask = ~mask;
-	var half = 1 << (a - 1);
-	var quarter = 1 << (a - 2);
-
-	for (var i = 0; i < m; i++) {
-        for (var j = 0; j < l; j++) {
-			var remainder = b1s[i][j] & mask;
-			var use_hint = ((remainder + quarter) >> (a - 1)) & 1;
-			//h: the hint of cmatrix
-			var shift = use_hint * (2 * h[i][j] - 1) * quarter;
-			// if use_hint = 1 and h = 0, adding -quarter forces rounding down
-			//                     h = 1, adding quarter forces rounding up
-			b1s[i][j] = (b1s[i][j] + half + shift) & negmask;
-			
-			b1s[i][j] >>= 11;
-			b1s[i][j] %= 16;
-		}
-	}
-}
 //=======================================================================================
 var TestMatrix = function() {
     var x = 0;
@@ -189,7 +78,6 @@ var TestMatrix = function() {
 		}
 	};
 //	-------------------------------------------public method-------------------------------------------
-	
 	var getMatrix = function() {
 		return matrix;
 	};
@@ -407,10 +295,118 @@ var TestMatrix = function() {
       mod:mod
     };
 };
+//=======================================================================================
+var am;
+var bm;
+var sm;
+var bb;
+var cc;
 
+var arr_v;
+var k1matrix;
+var k2matrix;
 
-//-------------------------------------------又是华丽的分隔线	-------------------------------------------
+function alice0() {
+    var amatrix = TestMatrix();
+	var smatrix = TestMatrix();
+	var ematrix = TestMatrix();
 
+    amatrix.initMatrix_random(n, n, q);
+	smatrix.initMatrix_2d_uncheck(ss, n, l);
+	ematrix.initMatrix_2d_uncheck(ee, n, l);
+	
+	var bmatrix = TestMatrix();
+	bmatrix = amatrix.multiply(smatrix).add(ematrix);
+	bmatrix.mod(q);
+	
+	am = amatrix;
+	bm = bmatrix;
+	sm = smatrix;
+}
+
+function bob() {
+	var amatrix = am;
+	var bmatrix = bm;
+	
+	var s1matrix = TestMatrix();	// Z^m*n
+	var e1matrix = TestMatrix();	// Z^m*n
+	var e2matrix = TestMatrix();	// Z^m*l
+	
+	s1matrix.initMatrix_2d_uncheck(ss1, m, n);
+	e1matrix.initMatrix_2d_uncheck(ee1, m, n);
+	e2matrix.initMatrix_2d_uncheck(ee2, m, l);
+	
+	var b1matrix = s1matrix.multiply(amatrix);
+	var vmatrix = s1matrix.multiply(bmatrix);
+	
+    b1matrix = b1matrix.add(e1matrix);  // Z^m*n
+    b1matrix.mod(q);
+    vmatrix = vmatrix.add(e2matrix);    // Z^m*l
+	vmatrix.mod(q);
+	
+	var newC = [];
+	var newV = [];
+	for (var i = 0; i < vmatrix.getMatrix().length; i++) {
+		newC[i] = vmatrix.getMatrix()[i].slice();
+		newV[i] = vmatrix.getMatrix()[i].slice();
+	}
+	
+	var cmatrix = TestMatrix();    // Z^m*l
+	k1matrix = TestMatrix();     // Z^m*l
+	cmatrix.initMatrix_2d_uncheck(newC, m, l);
+	k1matrix.initMatrix_2d_uncheck(newV, m, l);
+	
+	var arr_c = cmatrix.getMatrix();
+	var arr_k1 = k1matrix.getMatrix();
+    for (var i = 0; i < m; i++) {
+        for (var j = 0; j < l; j++) {
+            arr_c[i][j] = (arr_c[i][j] >> 10) & 1;	// >> logq - b - 1
+            //arr_c[i][j] = Math.floor(arr_c[i][j] * 0.0009765625) % 2;
+			
+			arr_k1[i][j] = (arr_k1[i][j] + 1024) % q;
+            arr_k1[i][j] >>= 11;  // >>= logq - b
+            //arr_k1[i][j] = Math.round(arr_k1[i][j] * 0.00048828125) % 16;
+        }
+    }
+	
+	bb = b1matrix;
+	cc = cmatrix;
+}
+
+function alice1() {
+	var b1m = bb;
+	var cm = cc;
+	var smatrix = sm;
+	
+	var b1s = b1m.multiply(smatrix);    // Z^m*l
+	b1s.mod(q);
+    k2matrix = b1s;     // Z^m*l
+	rec(k2matrix.getMatrix(), m, l, 11, cm.getMatrix());
+}
+//--------------------------------------------------------------------------------------
+function rec(b1s, m, l, a, h) {
+	var whole = 1 << a;
+	var mask = whole - 1;
+	var negmask = ~mask;
+	var half = 1 << (a - 1);
+	var quarter = 1 << (a - 2);
+
+	for (var i = 0; i < m; i++) {
+        for (var j = 0; j < l; j++) {
+			var remainder = b1s[i][j] & mask;
+			var use_hint = ((remainder + quarter) >> (a - 1)) & 1;
+			//h: the hint of cmatrix
+			var shift = use_hint * (2 * h[i][j] - 1) * quarter;
+			// if use_hint = 1 and h = 0, adding -quarter forces rounding down
+			//                     h = 1, adding quarter forces rounding up
+			b1s[i][j] = (b1s[i][j] + half + shift) & negmask;
+			
+			b1s[i][j] >>= 11;
+			b1s[i][j] %= 16;
+		}
+	}
+}
+//------------------------------------------- start testfrodo -------------------------------------------
 var b = 4;
 	l = 8,
 	m = 8,
@@ -445,7 +441,7 @@ function testfrodo() {
 }
 //***********************************************************
 function print(message) {
-//	WScript.Echo(message);
+//	WScript.Echo(message);	//for WSH
 	console.log(message);
 }
 testfrodo();
