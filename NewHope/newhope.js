@@ -1,4 +1,4 @@
-	//<script type="text/javascript" src="Utils/prng.js"></script>
+	//<script type="text/javascript" src="../Utils/prng.js"></script>
 
 	var INVN = 12277;	// 1024 * 12277 = 1 mod q
 	var bitRev_psi_12289_1024 = [
