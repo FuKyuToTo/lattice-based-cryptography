@@ -279,17 +279,17 @@ function checkDimensions(A, B) {
 }
 
 function nextInt(q) {
-	return Math.floor(Math.random() * q);
+	return Math.floor(random() * q);
 }
 
 function rangeValue(low, high) {
-	return Math.floor(Math.random() * (high - low + 1) + low);
+	return Math.floor(random() * (high - low + 1) + low);
 }
 
 function shuffle(arr) {
-    var arr2 = arr.slice();
-    for(var j, x, i = arr2.length; i; j = parseInt(Math.random() * i), x = arr2[--i], arr2[i] = arr2[j], arr2[j] = x);
-    return arr2;    
+	var arr2 = arr.slice();
+	for(var j, x, i = arr2.length; i; j = parseInt(random() * i), x = arr2[--i], arr2[i] = arr2[j], arr2[j] = x);
+	return arr2;    
 }
 
 function randomPlaintext () {
@@ -312,8 +312,9 @@ var m_transpose;
 
 function keyGeneration(l, m, n, q) {
 	//A, m*n
-    var amatrix = initMatrixRandom(m, n, q);
-    //S, n*l
+	//var amatrix = initMatrixRandom(m, n, q);
+	var amatrix = aa;
+	//S, n*l
 	var smatrix = ss;
 	//E, m*l
 	var ematrix = ee;
