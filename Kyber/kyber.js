@@ -107,7 +107,7 @@ function getBit (decimal_a, index) {
 	return (decimal_a >> index) & 1;
 }
 
-//return a copy of the original array, truncated or padded with zeros to obtain the specified length
+//returns a copy of the original array, truncated or padded with zeros to obtain the specified length
 function copyOf(arr1, length) {
 	var arr2 = new Array(length);
 	//var arr2 = [];
