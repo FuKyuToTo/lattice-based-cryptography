@@ -1,4 +1,4 @@
-//<script type="text/javascript" src="Utils/prng.js"></script>
+//<script type="text/javascript" src="../Utils/prng.js"></script>
 //<script type="text/javascript" src="frodo_random_values.js"></script>
 //=======================================================================================
 function initMatrixDefault(x, y) {
