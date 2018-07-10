@@ -4,7 +4,7 @@
 function initMatrixDefault(x, y) {
 	var matrix = new Array(x);
 	for (var i = 0; i < x; i++) {
-       	matrix[i] = new Array(y);
+       		matrix[i] = new Array(y);
 	}
 	return matrix;
 }
@@ -12,7 +12,7 @@ function initMatrixDefault(x, y) {
 function initMatrixRandom(x, y, q) {
 	var matrix = new Array(x);
 	for (var i = 0; i < x; i++) {
-       	matrix[i] = new Array(y);
+       		matrix[i] = new Array(y);
 		for (var j = 0; j < y; j++) {
 			matrix[i][j] = nextInt(q);
 		}
