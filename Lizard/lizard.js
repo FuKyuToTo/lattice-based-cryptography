@@ -87,9 +87,6 @@ function scalarMultiplyMod(s, A, q) {
 			if (C[i][j] < 0) {
 				C[i][j] += q;
 			}
-			//if (C[i][j] == 0) {
-			//	C[i][j] = 0;
-			//}
 		}
 	}
 	return C;
