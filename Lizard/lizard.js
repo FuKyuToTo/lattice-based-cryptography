@@ -312,8 +312,8 @@ var m_transpose;
 
 function keyGeneration(l, m, n, q) {
 	//A, m*n
-	//var amatrix = initMatrixRandom(m, n, q);
-	var amatrix = aa;
+	var amatrix = initMatrixRandom(m, n, q);
+	//var amatrix = aa;	// Does not apply in WSH
 	//S, n*l
 	var smatrix = ss;
 	//E, m*l
