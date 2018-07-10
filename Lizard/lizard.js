@@ -292,7 +292,7 @@ function shuffle(arr) {
 function randomPlaintext () {
 	var plaintext = new Array(l);
 	for (var i = 0; i < l; i++) {
-       	plaintext[i] = nextInt(2);
+       		plaintext[i] = nextInt(2);
 	}
 	vvector = plaintext;
 	m_transpose = scalarMultiplyVector(128, vvector);
