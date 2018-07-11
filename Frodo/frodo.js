@@ -10,7 +10,6 @@ function initMatrixDefault(x, y) {
 	return matrix;
 }
 
-
 //The constructor, each element is chosen uniformly at random
 function initMatrixRandom(x, y, q) {
 	var matrix = new Array(x);
