@@ -1,22 +1,23 @@
 //<script type="text/javascript" src="../Utils/prng.js"></script>	
 
-// Generates a random integer between 0(inclusive) and q-1(inclusive)
+//Returns the next pseudorandom, uniformly distributed integer between 0(inclusive) and q-1(inclusive)
 function nextInt(q) {
 	return Math.floor(random() * q);	// prng.js -> random()
 }
 	
-// Generates a random integer between low(inclusive) and high(inclusive)
+//Returns the pseudorandom integer value between low(inclusive) and high(inclusive)
 function rangeValue(low, high) {
 	return Math.floor(random() * (high - low + 1) + low);
 }
-		
+
+//Shuffles the input array
 function shuffle(arr) {
 	var arr2 = arr.slice();
 	for (var j, x, i = arr2.length; i; j = parseInt(random() * i), x = arr2[--i], arr2[i] = arr2[j], arr2[j] = x);
 	return arr2;
 }
 	
-//rejection sampling
+//Rejection sampling
 function testRejectionSampling(c, sigma) {
 	// Input: a center c, a gaussian parameter sigma, and a tail-cut parameter tau
 	// Output: x, with distribution statistically close to D_z,c,tau
@@ -40,7 +41,7 @@ function testRejectionSampling(c, sigma) {
 	}
 }
 
-//returns a copy of the original array, truncated or padded with zeros to obtain the specified length
+//Returns a copy of the original array, truncated or padded with zeros to obtain the specified length
 function copyOf(arr1, length) {
 	//    	var arr2 = new Array(length);
 	var arr2 = [];
@@ -54,7 +55,7 @@ function copyOf(arr1, length) {
 	return arr2;
 }
 
-//returns a new array containing the specified range from the original array, 
+//Returns a new array containing the specified range from the original array, 
 //truncated or padded with nulls to obtain the required length
 function copyOfRange(arr1, from, to) {
 	var length = to - from;
@@ -71,7 +72,7 @@ function copyOfRange(arr1, from, to) {
 	return arr2;
 }
 	
-// Karatsuba multiplication
+//Karatsuba multiplication
 function karatsuba(a, b) {	
 	var n = b.length;
 	if (n <= 32) {
@@ -124,20 +125,22 @@ function karatsuba(a, b) {
 		return c;
 	}
 }
-	
+
+//Polynomial addition
 function addIntPoly(a, b) {
 	for (var i = 0; i < b.length; i++) {
 		a[i] += b[i];
 	}
 }
 
+//Polynomial subtraction
 function subIntPoly(a, b) {
 	for (var i = 0; i < b.length; i++) {
 		a[i] -= b[i];
 	}
 }
 	
-//Multiplies each coefficient by a int. Does not return a new polynomial but modifies this polynomial.
+//Multiplies each coefficient by a int. Does not return a new polynomial but modifies this polynomial
 function multInt(a, factor) {
 	for (var i = 0; i < a.length; i++) {
 		a[i] *= factor;		
