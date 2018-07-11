@@ -54,7 +54,7 @@ function addMod(A, B, q) {
 	return C;
 }
 	
-//Vector c = a - b
+//Vector subtraction, c = a - b
 function vectorSubstract(a, b) {
 	if (b.length != a.length) {
 		alert("Vector length must agree");
@@ -94,7 +94,7 @@ function scalarMultiplyMod(s, A, q) {
 	return C;
 }
 
-//Matrix C = A * B
+//Matrix multiplication, C = A * B
 function multiply(A, B) {
 	var A_x = A.length;
 	var A_y = A[0].length;
@@ -132,7 +132,7 @@ function multiply(A, B) {
 	return C;
 }
 
-//Matrix C = A * B, each element of C modulo q
+//Matrix multiplication, C = A * B, each element of C modulo q
 function multiplyMod(A, B, q) {
 	var A_x = A.length;
 	var A_y = A[0].length;
@@ -246,7 +246,7 @@ function decVectorMultiplyMatrix(a, B) {
 	return v;
 }
 
-//Mod q
+//Modulo q
 function mod(A, q) {
 	var A_x = A.length;
 	var A_y = A[0].length;
