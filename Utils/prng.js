@@ -70,7 +70,7 @@ function Alea() {
 		random.args = args;
 		return random;
 	} (Array.prototype.slice.call(arguments)));
-};
+}
 
 //prng
 var random = Alea();
