@@ -388,7 +388,7 @@ function testkyber() {
 	var km = plaintext.toString();
 	var kv = v00.toString();
 	
-	print("plain text: " + km);
+	print("plaintext: " + km);
 	print("result: " + kv);
 	
 	if(km == kv) {
@@ -396,8 +396,6 @@ function testkyber() {
 	} else {
 		print("Failed");
 	}
-	
-	print("");
 }
 //***********************************************************
 function print(message) {
