@@ -277,12 +277,12 @@ function checkDimensions(A, B) {
 	}
 }
 
-//Returns the next pseudorandom, uniformly distributed integer from [0, q)
+//Returns the next pseudorandom, uniformly distributed integer between 0(inclusive) and q-1(inclusive)
 function nextInt(q) {
 	return Math.floor(random() * q);
 }
 
-//Returns the pseudorandom integer value from [low, high]
+//Returns the pseudorandom integer value between low(inclusive) and high(inclusive)
 function rangeValue(low, high) {
 	return Math.floor(random() * (high - low + 1) + low);
 }
