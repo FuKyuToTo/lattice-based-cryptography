@@ -41,6 +41,7 @@ function decompress2d(pow2d, q, v) {
 	return vector;
 }
 //========================================================================
+//Cooley-Tukey(CT) forward number theoretic transform
 function NTT(A, n) {
 	var NTT_A_COEFF = copyOf(A.slice(), n);
 	var t = n;
@@ -67,6 +68,7 @@ function NTT(A, n) {
 	return NTT_A_COEFF;
 }
 
+//Gentleman-Sande (GS) inverse number theoretic transform
 function INTT(A, n) {
 	var NTT_A_COEFF = copyOf(A.slice(), n);
 	var t = 1;
@@ -99,15 +101,17 @@ function INTT(A, n) {
 	return NTT_A_COEFF;
 }
 //--------------------------------------------------------------------------------------
+//Returns the next pseudorandom, uniformly distributed integer between 0(inclusive) and q-1(inclusive)
 function nextInt(q) {
 	return Math.floor(random() * q);	//prng.js -> random()
 }
 
+//Returns the bit of integer decimal_a at the index
 function getBit (decimal_a, index) {
 	return (decimal_a >> index) & 1;
 }
 
-//returns a copy of the original array, truncated or padded with zeros to obtain the specified length
+//Returns a copy of the original array, truncated or padded with zeros to obtain the specified length
 function copyOf(arr1, length) {
 	var arr2 = new Array(length);
 	//var arr2 = [];
@@ -121,6 +125,7 @@ function copyOf(arr1, length) {
 	return arr2;
 }
 
+//Binomial sampling
 function testBinomialSample (value) {
 	var sum = 0;
 	sum = (getBit(value, 0) - getBit(value, 4)) +
