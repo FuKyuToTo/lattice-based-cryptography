@@ -1,6 +1,7 @@
 //<script type="text/javascript" src="../Utils/prng.js"></script>
 //<script type="text/javascript" src="frodo_random_values.js"></script>
 //=======================================================================================
+//The default constructor
 function initMatrixDefault(x, y) {
 	var matrix = new Array(x);
 	for (var i = 0; i < x; i++) {
@@ -9,6 +10,8 @@ function initMatrixDefault(x, y) {
 	return matrix;
 }
 
+
+//The constructor, each element is chosen uniformly at random
 function initMatrixRandom(x, y, q) {
 	var matrix = new Array(x);
 	for (var i = 0; i < x; i++) {
@@ -20,7 +23,7 @@ function initMatrixRandom(x, y, q) {
 	return matrix;
 }
 //***************************************************
-//A'
+//Returns A', the transpose of a matrix A
 function transpose(A) {
 	var A_x = A.length;
 	var A_y = A[0].length;
@@ -34,7 +37,7 @@ function transpose(A) {
 	return C;
 }
 	
-//C = A + B
+//Matrix addition, C = A + B, each element of C modulo q
 function addMod(A, B, q) {
 	checkDimensions(A, B);
 	var A_x = A.length;
@@ -52,7 +55,7 @@ function addMod(A, B, q) {
 	return C;
 }
 	
-//C = A - B
+//Matrix subtraction, C = A - B, each element of C modulo q
 function substractMod(A, B, q) {
 	checkDimensions(A, B);
 	var A_x = A.length;
@@ -117,7 +120,7 @@ function multiply(A, B) {
 	return C;
 }
 
-//C = A * B mod q
+//Matrix multiplication, C = A * B, each element of C modulo q
 function multiplyMod(A, B, q) {
 	var A_x = A.length;
 	var A_y = A[0].length;
@@ -176,6 +179,7 @@ function vectorMultiplyMatrix(a, B) {
 	return v;
 }
 
+//Modulo q
 function mod(A, q) {
 	var A_x = A.length;
 	var A_y = A[0].length;
@@ -206,14 +210,17 @@ function checkDimensions(A, B) {
 	}
 }
 
+//Returns the next pseudorandom, uniformly distributed integer between 0(inclusive) and q-1(inclusive)
 function nextInt(q) {
 	return Math.floor(Math.random() * q);
 }
 
+//Returns the pseudorandom integer value between low(inclusive) and high(inclusive)
 function rangeValue(low, high) {
 	return Math.floor(Math.random() * (high - low + 1) + low);
 }
 
+//Computes Rec()
 function rec(b1s, m, l, a, h) {
 	var whole = 1 << a;
 	var mask = whole - 1;
