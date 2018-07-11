@@ -28,6 +28,7 @@ var kb;
 	
 var Bmatrix;
 //--------------------------------------------------------------------------------------
+//Cooley-Tukey(CT) forward number theoretic transform
 function NTT(A, n) {
 	var NTT_A_COEFF = copyOf(A.slice(), n);
 	var t = n;
@@ -50,7 +51,8 @@ function NTT(A, n) {
 	}// end for
 	return NTT_A_COEFF;
 }
-	
+
+//Gentleman-Sande (GS) inverse number theoretic transform
 function INTT(A, n) {
 	var NTT_A_COEFF = copyOf(A.slice(), n);
 	var t = 1;
@@ -82,16 +84,18 @@ function INTT(A, n) {
 	}// end for
 	return NTT_A_COEFF;
 }
-	
+
+//Returns the next pseudorandom, uniformly distributed integer between 0(inclusive) and q-1(inclusive)
 function nextInt(q) {
     return Math.floor(random() * q);	//prng.js -> random()
 }
-	
+
+//Returns the bit of integer decimal_a at the index
 function getBit (decimal_a, index) {
 	return (decimal_a >> index) & 1;
 }
 	
-//returns a copy of the original array, truncated or padded with zeros to obtain the specified length
+//Returns a copy of the original array, truncated or padded with zeros to obtain the specified length
 function copyOf(arr1, length) {
 	var arr2 = new Array(length);
 	for (var i = 0; i < length; i++) {
@@ -103,7 +107,8 @@ function copyOf(arr1, length) {
 	}
 	return arr2;
 }
-	
+
+//Binomial sampling
 function testBinomialSample (value) {
 	var sum = 0;
 	sum = (getBit(value, 0) - getBit(value, 16)) +
@@ -125,13 +130,15 @@ function testBinomialSample (value) {
 	//return sum;
 	return parseInt(Math.abs(sum));
 }
-	
+
+//Computes norm1
 function norm1(x0, x1, x2, x3){
 	//var sum = 0;
 	var sum = Math.abs(x0) + Math.abs(x1) + Math.abs(x2) + Math.abs(x3);
 	return sum;
 }
-	
+
+//Modulo modulus
 function mod(x, modulus) {
 	var remainder = 0;
 	if (modulus == 4) {
@@ -146,7 +153,8 @@ function mod(x, modulus) {
 	}
 	return remainder;
 }
-	
+
+//Computes helpRec()
 function helpRec(v, bit){
 	var r = new Array(v.length);
 	for (var i = 0; i < v.length; i++) {
@@ -155,7 +163,8 @@ function helpRec(v, bit){
 	cvp(r);
 	return r;
 }
-	
+
+//Computes CVP()
 function cvp(v_coeffs) {
 	for (var i = 0; i < v_coeffs.length / 4; i++) {
 		var x_0 = v_coeffs[i];
@@ -198,7 +207,8 @@ function cvp(v_coeffs) {
 		v_coeffs[i+ v_coeffs.length - v_coeffs.length/4] = mod(vk_3, 4);
 	}
 }
-	
+
+//Computes Rec()
 function rec(v_coeffs, r_coeffs, Bmatrix) {
 	var k = new Array(r_coeffs.length/4);
 	for (var i = 0; i < v_coeffs.length/4; i++) {
@@ -219,7 +229,8 @@ function rec(v_coeffs, r_coeffs, Bmatrix) {
 	}
 	return k;
 }
-	
+
+//Decoding function
 function decode(x_0, x_1, x_2, x_3) {	
 	var v_0 = x_0 - Math.round(x_0);
 	var v_1 = x_1 - Math.round(x_1);
