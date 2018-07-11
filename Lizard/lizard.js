@@ -21,8 +21,8 @@ function initMatrixRandom(x, y, q) {
 	}
 	return matrix;
 }
-
-//A', the transpose of a matrix A
+//***************************************************
+//Returns A', the transpose of a matrix A
 function transpose(A) {
 	var A_x = A.length;
 	var A_y = A[0].length;
@@ -36,7 +36,7 @@ function transpose(A) {
 	return C;
 }
 	
-//Matrix C = A + B
+//Matrix addition, C = A + B, each element modulo q
 function addMod(A, B, q) {
 	checkDimensions(A, B);
 	var A_x = A.length;
