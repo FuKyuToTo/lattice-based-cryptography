@@ -376,7 +376,7 @@ function testringlizard() {
 	var rs = result.toString();
 				
 	print("Output:");
-	print("plain text =  " + ms);
+	print("plaintext =  " + ms);
 	print("result = " + rs);
 		
 	if(rs == ms) {
@@ -384,7 +384,6 @@ function testringlizard() {
 	} else {
 		print("Failed");
 	}
-	print("");
 }
 	
 //***********************************************************
