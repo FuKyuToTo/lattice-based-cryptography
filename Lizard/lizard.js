@@ -380,12 +380,12 @@ function decrypt(l, q, t) {
 //------------------------------------------- start lizard -------------------------------------------
 var m = 960,
 	n = 608,
-	t = 2,
-	r = 1,
 	l = 256,
+   	t = 2,
 	p = 256,
 	q = 1024,
 	h = 128,
+	r = 1,
 	alpha = 0.000363;
 
 function testlizard() {
@@ -407,9 +407,9 @@ function testlizard() {
 	
 	print("Output:");
 	var ms = vvector.toString();
-	print("plain text =  " + ms);
+	print("plaintext =  " + ms);
 	var ts = resultvector.toString();
-	print("resulttext = " + ts);
+	print("result = " + ts);
 	
 	if(ts == ms) {
 		print("Success!");
