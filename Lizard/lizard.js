@@ -1,6 +1,7 @@
 //<script type="text/javascript" src="../Utils/prng.js"></script>
 //<script type="text/javascript" src="lizard_random_values.js"></script>
 //===============================================================================
+//The default constructor
 function initMatrixDefault(x, y) {
 	var matrix = new Array(x);
 	for (var i = 0; i < x; i++) {
@@ -9,6 +10,7 @@ function initMatrixDefault(x, y) {
 	return matrix;
 }
 
+//The constructor, each element is chosen uniformly
 function initMatrixRandom(x, y, q) {
 	var matrix = new Array(x);
 	for (var i = 0; i < x; i++) {
@@ -20,7 +22,7 @@ function initMatrixRandom(x, y, q) {
 	return matrix;
 }
 
-//A'
+//A', the transpose of a matrix A
 function transpose(A) {
 	var A_x = A.length;
 	var A_y = A[0].length;
@@ -34,7 +36,7 @@ function transpose(A) {
 	return C;
 }
 	
-//C = A + B
+//Matrix C = A + B
 function addMod(A, B, q) {
 	checkDimensions(A, B);
 	var A_x = A.length;
@@ -52,7 +54,7 @@ function addMod(A, B, q) {
 	return C;
 }
 	
-//c = a - b
+//Vector c = a - b
 function vectorSubstract(a, b) {
 	if (b.length != a.length) {
 		alert("Vector length must agree");
@@ -92,7 +94,7 @@ function scalarMultiplyMod(s, A, q) {
 	return C;
 }
 
-//C = A * B
+//Matrix C = A * B
 function multiply(A, B) {
 	var A_x = A.length;
 	var A_y = A[0].length;
@@ -130,7 +132,7 @@ function multiply(A, B) {
 	return C;
 }
 
-//C = A * B mod q
+//Matrix C = A * B, each element of C modulo q
 function multiplyMod(A, B, q) {
 	var A_x = A.length;
 	var A_y = A[0].length;
@@ -171,7 +173,7 @@ function multiplyMod(A, B, q) {
 	return C;
 }
 
-//Encrypt
+//For Encrypt
 //Multiplies a matrix B by a vector a, c = a * B
 function encVectorMultiplyMatrix(a, B) {
 	//var A_x = 1;
@@ -207,7 +209,7 @@ function encVectorMultiplyMatrix(a, B) {
 }
 
 
-//Decrypt
+//For Decrypt
 //Multiplies a matrix B by a vector a, c = a * B
 function decVectorMultiplyMatrix(a, B) {
 	//var A_x = 1;
@@ -244,7 +246,7 @@ function decVectorMultiplyMatrix(a, B) {
 	return v;
 }
 
-
+//Mod q
 function mod(A, q) {
 	var A_x = A.length;
 	var A_y = A[0].length;
@@ -275,28 +277,23 @@ function checkDimensions(A, B) {
 	}
 }
 
+//Returns the next pseudorandom, uniformly distributed integer from [0, q)
 function nextInt(q) {
 	return Math.floor(random() * q);
 }
 
+//Returns the pseudorandom integer value from [low, high]
 function rangeValue(low, high) {
 	return Math.floor(random() * (high - low + 1) + low);
 }
 
+//Shuffles the input array
 function shuffle(arr) {
 	var arr2 = arr.slice();
 	for(var j, x, i = arr2.length; i; j = parseInt(random() * i), x = arr2[--i], arr2[i] = arr2[j], arr2[j] = x);
 	return arr2;    
 }
 
-function randomPlaintext () {
-	var plaintext = new Array(l);
-	for (var i = 0; i < l; i++) {
-       		plaintext[i] = nextInt(2);
-	}
-	vvector = plaintext;
-	m_transpose = scalarMultiplyVector(128, vvector);
-}
 //***********************************************************
 var am;
 var bm;
@@ -306,7 +303,16 @@ var av;
 var bv;
 var resultvector;
 var m_transpose;
-
+//***********************************************************
+function randomPlaintext () {
+	var plaintext = new Array(l);
+	for (var i = 0; i < l; i++) {
+       		plaintext[i] = nextInt(2);
+	}
+	vvector = plaintext;
+	m_transpose = scalarMultiplyVector(128, vvector);
+}
+//***********************************************************
 function keyGeneration(l, m, n, q) {
 	//A, m*n
 	var amatrix = initMatrixRandom(m, n, q);
