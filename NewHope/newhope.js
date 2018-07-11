@@ -84,7 +84,7 @@ function INTT(A, n) {
 	}// end for
 	return NTT_A_COEFF;
 }
-
+//--------------------------------------------------------------------------------------
 //Returns the next pseudorandom, uniformly distributed integer between 0(inclusive) and q-1(inclusive)
 function nextInt(q) {
     return Math.floor(random() * q);	//prng.js -> random()
