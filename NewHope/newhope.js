@@ -361,7 +361,6 @@ function testnewhope() {
 	} else {
 		print("Failed");
 	}
-	print("");
 }
 //***********************************************************
 function print(message) {
